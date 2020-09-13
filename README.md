@@ -303,8 +303,10 @@ This will send through our username and password to the back end.
 
 If it's successful then we
 1. Set our local storage to have a json web token validating our login.
+* Local storage persists even after we close the tab or the browser. In our rails server our 'jwt' tokens are valid for 1 day so our users only need to login once a day.
 2. Set axios default headers to have an authorization key.
-3. Call the inherited function so that we can set the current user in App.js
+* This makes it so any further Axios requests for the current session of this app automatically send through the token in a header, without us needing to explicitly set that header in each axios request. You'll notice we are explicitly sending them through anyway, this is to show both ways you can do this!
+3. Call the function setCurrentUser that was passed in as a prop so that we can set the current user in App.js
 4. Redirect the URL of the page to /my_profile so we can load the MyProfile component.
 
 
